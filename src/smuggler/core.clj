@@ -19,6 +19,8 @@
   [data] 
   (map parse-doll data))
 
+(declare put-in-handbag-mem)
+
 (defn put-in-handbag
   "Pack dolls into handbag while maximizing street value"
   [doll-coll index-val handbag-weight]
@@ -27,7 +29,23 @@
     (empty? doll-coll) [0 []] ; there are no dolls
     (= handbag-weight 0) [0 []] ; the handbag cannot carry any more weight
     :else
-      [123 [0 1 2 3 4 6 10 15 16 17 18 20]]))
+     (let [{doll-weight :weight doll-value :value} (get doll-coll index-val)]
+      (if (> doll-weight handbag-weight) ; if the doll weighs too much
+        ; try putting in previous doll 
+        (put-in-handbag-mem doll-coll (dec index-val) handbag-weight)
+        ; otherwise get the remaining handbag weight and continue
+        (let [new-handbag-weight (- handbag-weight doll-weight)
+          ; determine if doll maximizes street value
+          [no-val no-vec :as no] (put-in-handbag-mem doll-coll (dec index-val) handbag-weight)
+          [yes-val yes-vec :as yes] (put-in-handbag-mem doll-coll (dec index-val) new-handbag-weight)]
+          ; if the target street value is increased 
+          (if (> (+ yes-val doll-value) no-val) ;
+            ; add this doll to the handbag
+            [(+ yes-val doll-value) (conj yes-vec index-val)]
+            ; don't put it in the handbag
+            no))))))
+
+(def put-in-handbag-mem (memoize put-in-handbag))
 
 (defn -main
   [& args]
