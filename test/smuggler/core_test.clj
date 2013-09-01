@@ -47,4 +47,9 @@
   (deftest puts-correct-dolls-in-handbag
     (let [[street-value dolls-in-bag] (put-in-handbag sample-dolls 21 400)]
           (is (= best-dolls dolls-in-bag))
-    )))
+    ))
+  (deftest handles-no-dolls
+    (let [[street-value dolls-in-bag] (put-in-handbag [] 21 400)]
+          (is (= [] dolls-in-bag))
+    ))
+  )
