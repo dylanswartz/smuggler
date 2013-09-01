@@ -62,4 +62,4 @@ Checkout [Leiningan on GitHub](https://github.com/technomancy/leiningen) for mor
 	total weight: 396
 
 ### Running Tests
-	$ lein test [TESTS] # run the tests in the TESTS namespaces, or all tests
+	$ lein test
