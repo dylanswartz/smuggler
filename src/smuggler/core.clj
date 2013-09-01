@@ -2,6 +2,9 @@
   (:use [clojure.string :only (split-lines)])
   (:gen-class))
 
+; define a data structure for the doll data
+(defstruct doll :name :weight :value)
+
 (defn read-data-file
 	[filename]
 	(split-lines (slurp filename)))
