@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [smuggler.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(testing "it should read a datafile"
+	(deftest reads-data-file
+		(is (= ["luke 9 150"] (read-data-file "test/smuggler/test.txt")))))
