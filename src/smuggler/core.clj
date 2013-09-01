@@ -11,10 +11,13 @@
 	(split-lines (slurp filename)))
 
 (defn parse-doll 
-  [line] (def tokens (split line #"\s+"))
+  [line] 
+  (def tokens (split line #"\s+"))
   (struct doll (nth tokens 0) (read-string (nth tokens 1)) (read-string (nth tokens 2))))
 
-(defn parse-dolls [data] [{:name "sally", :weight 4, :value 50} {:name "babe", :weight 30, :value 10}])
+(defn parse-dolls 
+  [data] 
+  (map parse-doll data))
 
 (defn -main
   [& args]
