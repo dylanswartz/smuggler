@@ -7,8 +7,11 @@
 	(split-lines (slurp filename)))
 
 (defn -main
-  "I don't do a whole lot ... yet."
   [& args]
   ;; work around dangerous default behaviour in Clojure
   (alter-var-root #'*read-eval* (constantly false))
+  (if (= (count args) 0)
+      ((println "Usage: lein run <path to data file>")
+       (System/exit 0)))
+  (def filename (first args))
   (println "Hello, World!"))
