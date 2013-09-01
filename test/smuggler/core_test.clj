@@ -52,4 +52,12 @@
     (let [[street-value dolls-in-bag] (put-in-handbag [] 21 400)]
           (is (= [] dolls-in-bag))
     ))
+  (deftest handles-no-indexes
+    (let [[street-value dolls-in-bag] (put-in-handbag sample-dolls -1 400)]
+          (is (= [] dolls-in-bag))
+    ))
+  (deftest handles-zero-weight
+    (let [[street-value dolls-in-bag] (put-in-handbag sample-dolls 21 0)]
+          (is (= [] dolls-in-bag))
+    ))
   )

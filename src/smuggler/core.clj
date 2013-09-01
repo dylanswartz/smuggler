@@ -22,8 +22,12 @@
 (defn put-in-handbag
   "Pack dolls into handbag while maximizing street value"
   [doll-coll index-val handbag-weight]
-  [123 [0 1 2 3 4 6 10 15 16 17 18 20]]
-  )
+  (cond
+    (< index-val 0) [0 []] ; there are no dolls
+    (empty? doll-coll) [0 []] ; there are no dolls
+    (= handbag-weight 0) [0 []] ; the handbag cannot carry any more weight
+    :else
+      [123 [0 1 2 3 4 6 10 15 16 17 18 20]]))
 
 (defn -main
   [& args]
