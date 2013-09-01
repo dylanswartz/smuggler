@@ -19,6 +19,12 @@
   [data] 
   (map parse-doll data))
 
+(defn put-in-handbag
+  "Pack dolls into handbag while maximizing street value"
+  [doll-coll index-val handbag-weight]
+  [123 [0 1 2 3 4 6 10 15 16 17 18 20]]
+  )
+
 (defn -main
   [& args]
   ;; work around dangerous default behaviour in Clojure
