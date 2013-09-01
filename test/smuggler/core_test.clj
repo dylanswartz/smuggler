@@ -14,4 +14,6 @@
 		(is (= testdoll (parse-doll "sally 4 50"))))
 	(deftest parses-multiple-dolls
     	(def testdolls [testdoll testdoll2])
-    	(is (= testdolls (parse-dolls ["sally 4 50" "babe 30 10"])))))
+    	(is (= testdolls (parse-dolls ["sally 4 50" "babe 30 10"]))))
+	(deftest parses-no-dolls
+    	(is (= 0 (count (parse-dolls []))))))
