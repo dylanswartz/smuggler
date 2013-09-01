@@ -19,6 +19,9 @@
   [data] 
   (map parse-doll data))
 
+(defn parse-int [s]
+   (Integer. (re-find  #"\d+" s )))
+
 (declare put-in-handbag-mem)
 
 (defn put-in-handbag
@@ -51,8 +54,20 @@
   [& args]
   ;; work around dangerous default behaviour in Clojure
   (alter-var-root #'*read-eval* (constantly false))
-  (if (= (count args) 0)
+  (if (< (count args) 2)
       ((println "Usage: lein run <path to data file>")
        (System/exit 0)))
   (def filename (first args))
-  (println "Hello, World!"))
+  (def max-weight (parse-int (second args)))
+
+  ; Create a vector of dolls fom the doll data like so:
+  ;[{:name luke, :weight 9, :value 150} 
+  ; {:name anthony, :weight 13, :value 35}
+  ; {:name candice, :weight 153, :value 200} ... ]
+  (def dolls (vec (parse-dolls (read-data-file filename))))
+  (let [[street-value dolls-in-bag] (put-in-handbag dolls(-> dolls count dec) max-weight)]
+    (println "packed dolls: \n")
+    ; use dorun to get around map's laziness
+    (dorun (map #(println (get dolls %)) (reverse dolls-in-bag)))
+    (println "\ntotal street-value:" street-value)
+    (println "total weight:" (reduce + (map (comp :weight dolls) dolls-in-bag)))))

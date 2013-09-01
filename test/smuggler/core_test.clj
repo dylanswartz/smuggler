@@ -59,5 +59,8 @@
   (deftest handles-zero-weight
     (let [[street-value dolls-in-bag] (put-in-handbag sample-dolls 21 0)]
           (is (= [] dolls-in-bag))
-    ))
-  )
+    )))
+
+(testing "parse int returns int"
+  (deftest parse-int-returns-int
+    (is (= 5 (parse-int "5")))))
