@@ -22,6 +22,10 @@
 (defn parse-int [s]
    (Integer. (re-find  #"\d+" s )))
 
+(defn pretty-print
+  [doll]
+  (println (format "%-8s %5s %5s"(get doll :name) (get doll :weight) (get doll :value))))
+
 (declare put-in-handbag-mem)
 
 (defn put-in-handbag
@@ -67,7 +71,8 @@
   (def dolls (vec (parse-dolls (read-data-file filename))))
   (let [[street-value dolls-in-bag] (put-in-handbag dolls(-> dolls count dec) max-weight)]
     (println "packed dolls: \n")
+    (println (format "%-8s %5s %5s" "name" "weight" "value"))
     ; use dorun to get around map's laziness
-    (dorun (map #(println (get dolls %)) (reverse dolls-in-bag)))
+    (dorun (map #(pretty-print (get dolls %)) (reverse dolls-in-bag)))
     (println "\ntotal street-value:" street-value)
     (println "total weight:" (reduce + (map (comp :weight dolls) dolls-in-bag)))))
