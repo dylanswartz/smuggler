@@ -9,7 +9,7 @@ Solution to this: [Clojure Programming Challenge](https://github.com/micahalles/
 
 ### Usage
 
-    $ lein run datafile max-weight
+    $ lein run <DATFILE> <MAX-WEIGHT>
 Checkout [Leiningan on GitHub](https://github.com/technomancy/leiningen) for more info.
 
 **Sample run:** 
